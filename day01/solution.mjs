@@ -13,7 +13,6 @@ const wordToNumberMap = {
 };
 
 const regexp = new RegExp(`${Object.keys(wordToNumberMap).join("|")}|\\d`, "g");
-console.log(regexp);
 
 function main() {
   const data = readFileSync("./day01/input2.txt", "utf-8");

@@ -29,7 +29,7 @@ function isValidGame(input) {
 }
 
 // Part 2
-function minCubesPerColor(input) {
+function computeMaxCubesPerColor(input) {
   const cubesPart = input.substring(input.indexOf(":") + 1);
 
   const cubeCounts = {
@@ -64,7 +64,7 @@ function main() {
 // Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`;
 
   const result = data.split("\n").reduce((acc, line) => {
-    const cubeCounts = minCubesPerColor(line);
+    const cubeCounts = computeMaxCubesPerColor(line);
     return acc + Object.values(cubeCounts).reduce((acc, count) => acc * count, 1);
   }, 0);
 

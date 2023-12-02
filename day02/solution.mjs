@@ -17,10 +17,7 @@ function isValidGame(input) {
 
     if (cubeCount > maxCubes) return 0;
 
-    const sectionEnd =
-      match.index + cubesPart.substring(match.index).match(/,|;/).index;
-    const section = cubesPart.substring(match.index, sectionEnd);
-    const cubeColor = section.match(/[a-z]+/)[0];
+    const cubeColor = cubesPart.substring(match.index + 2).match(/[a-z]+/)[0];
 
     if (cubeCount > maxCubesPerColor[cubeColor]) return 0;
   }
@@ -51,7 +48,7 @@ function computeMaxCubesPerColor(input) {
 }
 
 function main() {
-  const data = readFileSync("./day02/input2.txt", "utf-8");
+  const data = readFileSync("./day02/input1.txt", "utf-8");
   //   const data = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
   // Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
   // Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
@@ -64,6 +61,10 @@ function main() {
 // Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`;
 
   const result = data.split("\n").reduce((acc, line) => {
+    // Part 1
+    return acc + isValidGame(line);
+    
+    // Part 2
     const cubeCounts = computeMaxCubesPerColor(line);
     return acc + Object.values(cubeCounts).reduce((acc, count) => acc * count, 1);
   }, 0);

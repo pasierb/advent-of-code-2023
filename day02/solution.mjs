@@ -30,9 +30,7 @@ function isValidGame(input) {
 
 // Part 2
 function minCubesPerColor(input) {
-//   console.log(input);
   const cubesPart = input.substring(input.indexOf(":") + 1);
-//   console.log(cubesPart);
 
   const cubeCounts = {
     red: 0,
@@ -40,13 +38,14 @@ function minCubesPerColor(input) {
     blue: 0,
   };
 
-  for (let set of cubesPart.split(";")) {
-    for (let item of set.split(',')) {
-      const [_, count, color] =  item.match(/(\d+) ([a-z]+)/);
+  Object.keys(cubeCounts).forEach((color) => {
+    const regexp = new RegExp(`\\d+ ${color}`, "g");
+    const matches = [...cubesPart.matchAll(regexp)];
 
-      cubeCounts[color] = Math.max(cubeCounts[color], parseInt(count));
-    }
-  }
+    cubeCounts[color] = Math.max(
+      ...matches.map((match) => parseInt(match[0].split(" ")[0]))
+    );
+  });
 
   return cubeCounts;
 }

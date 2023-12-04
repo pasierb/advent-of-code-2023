@@ -39,7 +39,7 @@ function part2() {
     return selected.filter((x) => new Set([...winning]).has(x)).length;
   }
 
-  function processCard(index, scores = {}) {
+  function processCard(index, scores) {
     let score = 1; // 1 for the card itself
 
     // if we already calculated the score for this card, return it
@@ -55,8 +55,9 @@ function part2() {
     return score;
   }
 
+  const scores = {};
   // process original cards
-  return cards.reduce((acc, _, i) => acc + processCard(i), 0);
+  return cards.reduce((acc, _, i) => acc + processCard(i, scores), 0);
 }
 
 async function main() {
